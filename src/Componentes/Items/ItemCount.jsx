@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "react-bootstrap";
 import swal from "sweetalert";
 import Widget from "../Widget/Widget";

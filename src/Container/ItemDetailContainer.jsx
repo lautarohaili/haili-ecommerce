@@ -1,31 +1,32 @@
 import { useEffect, useState } from "react";
 import getItem from "../Componentes/Helpers/Getitem";
-import ItemList from "../Componentes/Items/ItemList";
+import ItemDetail from "../Componentes/Items/ItemDetail";
 import Loading from "../Componentes/Loading/Loading";
 
-function ItemListContainer({ saludo }) {
+function ItemDetailContainer() {
   const [loading, setLoading] = useState(true);
-  const [prods, setProds] = useState([]);
+  const [producto, setProductos] = useState({});
 
   useEffect(() => {
     getItem
-      .then((data) => setProds(data))
-      .catch((err) => console.error(`error: ${err}`))
+      .then((resp) => setProductos(resp.find((prod) => prod.id === 1)))
+      .catch((err) => console.log(err))
       .finally(() => setLoading(false));
   }, []);
 
+  console.log(producto);
+
   return (
     <>
-      <div>{saludo}</div>
       {loading ? (
         <Loading />
       ) : (
         <div className="container">
-          <ItemList prods={prods} />
+          <ItemDetail producto={producto} />
         </div>
       )}
     </>
   );
 }
 
-export default ItemListContainer;
+export default ItemDetailContainer;
